@@ -37,7 +37,15 @@ function changeDat(param){
             }
         }
         console.log(val)
-    
+
+        let card = document.createElement('div');
+        card.className = 'card';
+        let image = domcument.createElement('img');
+        
+        let body = document.createElement('div');
+        let title = document.createElement('h5');
+        let content = document.createElement('p');
+        let a = document.createElement('a');
     
     
     
