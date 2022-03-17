@@ -1,9 +1,18 @@
 let div = document.createElement("div")
 let titulo = document.createElement("h2")
 
+
+
 let contadorCarrito = 0;
 
 let pedido = {};
+
+let tablaPedido = [];
+
+
+
+
+
 
 const url = "https://gist.githubusercontent.com/josejbocanegra/9a28c356416badb8f9173daf36d1460b/raw/5ea84b9d43ff494fcbf5c5186544a18b42812f09/restaurant.json"
 
@@ -54,7 +63,7 @@ function tabla(){
     hideMenu();
 
     document.getElementById("compras").innerHTML = "";
-
+    total = 0;
     contador = 0;
 
     let tabla = document.createElement("table");
@@ -86,11 +95,11 @@ function tabla(){
         contador = 1;
 
         datos = prod.split('-')
-        console.log(datos);
 
         let tr1 = document.createElement("tr");
         let item1 = document.createElement("td");
         item1.innerHTML = contador;
+        
         tr1.appendChild(item1);
         let qty1 = document.createElement("td");
         qty1.innerHTML = pedido[prod];
@@ -103,8 +112,12 @@ function tabla(){
         tr1.appendChild(price1);
         let amount1 = document.createElement("td");
         amount1.innerHTML = (datos[1]*pedido[prod]); 
+        total += (datos[1]*pedido[prod]);
         tr1.appendChild(amount1);
         let modify1 = document.createElement("td");
+
+        objeto = {"item": contador, "quantity": pedido[prod], "description": datos[0], "unitPrice": datos[1] };
+        tablaPedido.push(objeto);
 
         let mas = document.createElement("img");
         mas.src = "mas.PNG";
@@ -153,9 +166,67 @@ function tabla(){
 
     document.getElementById("compras").appendChild(tabla);
 
-    
+    info = document.createElement("div");
+    info.className = "conteiner";
+
+    row = document.createElement("div");
+    row.className= "row";
+
+    col1 = document.createElement("div");
+    col1.className = "col d-flex"
+    col1.style.alignContent = "start";
+
+    h6 = document.createElement("h6");
+    h6.innerHTML = "Total: " + total;
+
+    col1.appendChild(h6);
+
+
+
+
+    col2 = document.createElement("div");
+
+    boton1 = document.createElement("button")
+    boton1.className = "btn btn-danger";
+    boton1.type="button";
+
+
+    boton1.innerHTML = "Cancel";
+
+    col2.appendChild(boton1);
+
+    boton2 = document.createElement("button")
+    boton2.className = "btn btn-success";
+    boton2.type="button";
+
+    boton2.innerHTML ="Confirm order"
+    boton2.style.marginLeft = "15px"
+    boton2.style.marginRight = "22px"
+    boton2.onclick = function() { confirmarPedido(), hideTabla(); document.getElementById("exampleModal").modal('toggle');};
+
+    col2.appendChild(boton2);
+
+
+    row.appendChild(col1);
+
+
+
+    row.appendChild(col2);
+    document.getElementById("compras").appendChild(row);
+
 
 }
+
+
+function confirmarPedido(){
+    console.log(tablaPedido);
+    pedido = {};
+    tablaPedido =[]
+    
+    contadorCarrito = 0;
+    changeDat(nom);
+}
+    
 
 function addCarritoElement(elemento){
 
@@ -167,7 +238,7 @@ function addCarritoElement(elemento){
         img.style.height = "60px";
         contenido.onclick = function(){tabla()};
         contenido.appendChild(img);
-        contenido.innerHTML+=contadorCarrito;
+        contenido.innerHTML+=contadorCarrito +" items";
         carrito.appendChild(contenido);
 
     }
@@ -179,7 +250,6 @@ function addCarritoElement(elemento){
         else{
             pedido[elemento] = 1;
         }
-        console.log(pedido);
     
         
         carrito.innerHTML = "";
@@ -190,7 +260,7 @@ function addCarritoElement(elemento){
         img.style.height = "60px";
         contenido.onclick = function(){tabla()};
         contenido.appendChild(img);
-        contenido.innerHTML+=contadorCarrito;
+        contenido.innerHTML+=contadorCarrito + " items";
         carrito.appendChild(contenido);
 
     }
@@ -199,25 +269,21 @@ function addCarritoElement(elemento){
 
 function changeDat(param){
     nom = param;
-    console.log(param);
     getData((value) =>{
 
         array = value;
 
         val = {}
     
-        console.log(array)
         for(el in array){
             if(array[el]["name"] == nom){
                 val = array[el]
             }
         }
 
-        console.log(val)
          
 
         productos = val["products"]
-        console.log(productos)
 
         document.getElementById("info").innerHTML = "";
 
@@ -233,6 +299,7 @@ function changeDat(param){
             p = productos[i];
 
             let card = document.createElement('div');
+            card.style.maxWidth= "22%"
             card.className = 'card justify-content-center';
 
             let image = document.createElement('img');
@@ -276,7 +343,7 @@ function changeDat(param){
 
             element+=1;
 
-            if(element%3 == 0 ){
+            if(element%4== 0 ){
                 document.getElementById('info').appendChild(cardDek);
                 cardDek = document.createElement('div');
                 cardDek.className = "card-deck";
@@ -285,14 +352,22 @@ function changeDat(param){
 
 
         }
-        if(element%3 != 0 ){
+        if(element%4 != 0 ){
 
             document.getElementById('info').appendChild(cardDek);
         }
 
+        
+
+        
+    
+    
+    
+    
     });
 
 
 }
 
-changeDat(nom)
+changeDat(nom);
+
