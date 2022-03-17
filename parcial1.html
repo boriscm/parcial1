@@ -13,19 +13,22 @@
 
 
 
-</head>
-    <div></div>
-    <header class="p-3 mb-3 border-bottom border-dark">
-        <ul  class="navbar-nav">
-        <li class="nav-item">
-            <H1 style="font-family: Lucida Handwriting;"> Restaurant E Longe</H1>
-        </li>
+    </head>
+    
+    <div class="conteiner border-bottom border-dark" style="margin-bottom: 15px; margin-top: 15px;" id="car1">
+        <div class="row">
+            <div class="col d flex" style="align-content:start; "> 
+                <h1 style="font-family: Lucida Handwriting;"> Restaurant E Longe</h1>
 
-        <li class="nav-item">
-        </li>
-        </ul>
+            
+            </div>
+            <div class="col d-flex justify-content-end" id="carrito">
+                <a><img src="carrito.png"  style="height: 60px;">0</a>
+                
+            </div>
         </div>
-      </header>
+    </div>
+    </div>
       </div>
     
       <img src="fondo.png" class="img-fluid" alt="Responsive image">
@@ -37,28 +40,41 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item ">
-                <a class="nav-link" onclick="changeDat('Burguers')" href="#"><h2>Burguers</h2> <span class="sr-only">(current)</span></a>
+                <a class="nav-link" onclick="changeDat('Burguers');  hideTabla();" href="#"><h4>Burguers</h4> <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" onclick = "changeDat('Tacos')" href="#"> <h2>Tacos</h2></a>
+                <a class="nav-link" onclick = "changeDat('Tacos'); hideTabla();" href="#"> <h4>Tacos</h4></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" onclick = "changeDat('Salads')" href="#"> <h2>Salads</h2></a>
+                <a class="nav-link" onclick = "changeDat('Salads');  hideTabla();" href="#"> <h4>Salads</h4></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" onclick = "changeDat('Desserts')" href="#"><h2>Desserts</h2></a>
+                <a class="nav-link" onclick = "changeDat('Desserts'); hideTabla();" href="#"><h4>Desserts</h4></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" onclick = "changeDat('Drinks and Sides')" href="#"><h2>Drinks & Sides</h2></a>
+                <a class="nav-link" onclick = "changeDat('Drinks and Sides');  hideTabla();" href="#"><h4>Drinks & Sides</h4></a>
               </li>
             </ul>
           </div>
     </nav>
+    <div id = "menu" style="margin-left: 15%; margin-right: 15%;">
+        <div class="conteiner border-bottom border-dark justify-content-center align-items-center" style="margin-bottom: 15px; margin-top: 15px;" id="">
+            <h1 id = "titulo" style="flex-direction: column;  justify-content: center;text-align: center;">
+                
+            </h1>
+        </div>
 
-    <div id="info">
-        
+        <div id="info" >
+            
 
-        
+            
+        </div>
     </div>
+    <div id="compras"style="margin-left: 15%; margin-right: 15%;">
+
+
+    </div>
+
+
 
 </html>
